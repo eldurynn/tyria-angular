@@ -1,0 +1,13 @@
+<mat-drawer-container class="h-screen" (backdropClick)="isOpen = !isOpen">
+    <mat-drawer mode="push" [opened]="isOpen" class="drawer">
+        <app-navigation-list></app-navigation-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="h-full flex flex-col">
+            <app-header [navMenuOpened]="isOpen" (toggleNavigationMenu)="isOpen = $event"></app-header>
+            <div class="grow inset-shadow-sm">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
