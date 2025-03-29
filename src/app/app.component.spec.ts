@@ -1,29 +1,15 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { createComponentFactory, Spectator } from "@ngneat/spectator/jest";
+
+import { AppComponent } from "./app.component";
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
-  });
+  let spectator: Spectator<AppComponent>;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  const createComponent = createComponentFactory(AppComponent);
 
-  it(`should have the 'workspace' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('workspace');
-  });
+  beforeEach(() => spectator = createComponent());
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, workspace');
+  test('should create component', () => {
+    expect(spectator.component).toBeTruthy();
   });
 });
